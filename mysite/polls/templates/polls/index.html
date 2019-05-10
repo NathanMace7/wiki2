@@ -1,0 +1,13 @@
+{% extends 'polls/base.html' %}
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% block content %}
+{% if latest_question_list %}
+
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
+
+
+{% endblock %}

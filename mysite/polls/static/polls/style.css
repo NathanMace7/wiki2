@@ -1,0 +1,19 @@
+li a {
+    color: rgb(0, 143, 0);
+}
+
+body {
+    background: rgb(255, 255, 255);
+}
+
+h1 {
+    font-family: 'Days One', sans-serif;
+}
+
+h2 {
+    font-family: 'Days One', sans-serif; font-size: 15px; color: rgb(0, 143, 0);
+}
+
+strong {
+    color: red;
+}

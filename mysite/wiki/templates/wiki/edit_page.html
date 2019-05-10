@@ -1,0 +1,23 @@
+{% extends 'wiki/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<!--<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+    <script>tinymce.init({forced_root_block : "", selector:'#id_content', plugins: 'autolink',remove_trailing_brs: false });</script> -->
+
+<!--Title-->
+<h2>
+    <div class="alert alert-warning" role="alert">{%block contentTitle %}Editing "{{page_name}}"{% endblock %}</div>
+</h2>
+
+<!--Form-->
+<form method="post" action="{% url 'wiki:save_page' page_name %}" class="text-center">
+    {% csrf_token %}
+    <textarea id="id_content" name="content" style="width:95%; height:90%; min-height: 300px;">{{content}}</textarea>
+
+    <!--Save / Cancel-->
+    <br />
+    <button name="Save" class="btn btn-primary" type="submit" value="Save">Save</button>
+    <button name="Cancel" class="btn btn-secondary" type="submit" value="Reset">Cancel</button>
+</form>
+{% endblock %}
