@@ -1,27 +1,31 @@
 {% extends 'wiki/base.html' %}
 {% load static %}
-{% block title %}Upload{% endblock %}
-{% block pageheader %}Uploaded Files{% endblock %}
-{% block content %}
+
 <section>
-    
+
+    {% block content %}
+    <h2>Upload A File</h2>
+
     <form method='POST' enctype='multipart/form-data' action="{% url 'wiki:upload_page' %}">
-    {% csrf_token %}
-        {{form}}    
-    <input type='submit' value="Upload">
+        {% csrf_token %}
+        {{form}}
+        <input type='submit' value="Upload">
     </form>
 
 </section>
-<hr/>
+
+<hr />
+
 <section>
-{% if files %}
+    <h2>Uploaded Files:</h2>
+    {% if files %}
     <ul>
-    {% for file in files %}
-    <li><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
-    {% endfor %}
+        {% for file in files %}
+        <li><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
+        {% endfor %}
     </ul>
-{% else %}
-<p>No uploaded files</p>
-{% endif %}
+    {% else %}
+    <p>No uploaded files</p>
+    {% endif %}
 </section>
 {% endblock %}
