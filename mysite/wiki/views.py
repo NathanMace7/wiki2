@@ -35,7 +35,7 @@ def edit_page(request, pk):
         content = ''
     return render(request, 'wiki/edit_page.html', {'page_name': pk, 'content': content},)
 
-
+@login_required(login_url='wiki:login')
 def save_page(request, pk):
     content = request.POST["content"]
     try:
@@ -46,3 +46,10 @@ def save_page(request, pk):
     if 'Save' in request.POST:
         page.save()
     return redirect(page)
+
+@login_required(login_url='wiki:login')
+def delete_page(request, pk):
+    page = Page.objects.get(pk=pk)
+    template_name = 'wiki/delete.html'
+    context = {"object": obj}
+    return render(request, template_name, context)
