@@ -1,0 +1,27 @@
+{% extends 'mysite/base.html' %}
+{% load static %}
+{% block title %}Upload{% endblock %}
+{% block pageheader %}Uploaded Files{% endblock %}
+{% block content %}
+<section>
+    
+    <form method='POST' enctype='multipart/form-data' action="{% url 'wiki:upload_page' %}">
+    {% csrf_token %}
+        {{form}}    
+    <input type='submit' value="Upload">
+    </form/>
+
+</section>
+<hr/>
+<section>
+{% if files %}
+    <ul>
+    {% for file in files %}
+    <li><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+<p>No uploaded files</p>
+{% endif %}
+</section>
+{% endblock %}

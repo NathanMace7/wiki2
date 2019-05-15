@@ -2,7 +2,8 @@ from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Page
+from .models import Page, UserFileUpload
+from .forms import UploadFileForm
 
 
 class IndexView(generic.ListView):
@@ -35,6 +36,7 @@ def edit_page(request, pk):
         content = ''
     return render(request, 'wiki/edit_page.html', {'page_name': pk, 'content': content},)
 
+
 @login_required(login_url='wiki:login')
 def save_page(request, pk):
     content = request.POST["content"]
@@ -47,9 +49,23 @@ def save_page(request, pk):
         page.save()
     return redirect(page)
 
+
 @login_required(login_url='wiki:login')
 def delete_page(request, pk):
     page = Page.objects.get(pk=pk)
     template_name = 'wiki/delete.html'
     context = {"object": obj}
     return render(request, template_name, context)
+
+
+def upload_file(request):
+    context = {}
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UploadFileForm()
+    context['form'] = form
+    context['files'] = UserFileUpload.objects.all().order_by('upload')
+    return render(request, 'wiki/upload.html', context)

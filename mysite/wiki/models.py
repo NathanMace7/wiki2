@@ -11,3 +11,10 @@ class Page(models.Model):
 
     def get_absolute_url(self):
         return reverse('wiki:detail', args=[self.title])
+
+class UserFileUpload(models.Model):
+    upload = models.FileField(upload_to='uploads/')
+    #file will be saved to MEDIA_ROOT/uploads
+    
+    def __str__(self):
+        return self.upload.name
