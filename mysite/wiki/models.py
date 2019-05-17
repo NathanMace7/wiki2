@@ -18,3 +18,9 @@ class UserFileUpload(models.Model):
     
     def __str__(self):
         return self.upload.name
+
+    def delete(self, *args, **kwargs):
+        path = os.path.join(settings.MEDIA_ROOT, self.upload.name)
+        if os.path.exists(path):
+            os.remove(path)
+        super().delete(*args, **kwargs)
