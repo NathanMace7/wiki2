@@ -3,6 +3,21 @@
 {% block content %}
 <!--Title-->
 {% block contentTitle %}
+<ul class="flex-container">
+        <li><h2 class="text-primary" style="font-size: 30px;"></h2></li>
+        <ul class="flex-container">
+            <li>
+                <!--Login / Logout Button-->
+                <!--Log out-->
+                {% if user.is_authenticated %}
+                <a href="{% url 'wiki:logout' %}" class="btn btn-danger" style="align-self: right;">Logout</a><br><br>
+                {% else %}
+                <a href="{% url 'wiki:logout' %}" class="btn btn-primary">Login</a><br>
+                <br>
+                {% endif %}
+            </li>
+        </ul>
+    </ul>
 <div class="container">
     <h2 class="text-primary" style="font-size: 30px;">{{page_name}}</h2>{% endblock %}
     <!--If the title does not match any existing pages, 
