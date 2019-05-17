@@ -59,22 +59,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'wiki:index' %}">Wiki Index<span
+                    <a class="nav-link" href="{% url 'wiki:index' %}" style="font-size: 20px;">Wiki Index<span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'wiki:upload_page' %}">Upload<span
+                    <a class="nav-link" href="{% url 'wiki:upload_page' %}" style="font-size: 20px;">Upload<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <br>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                </li>
                 <li>
                     <!--Login / Logout Button-->
                     <!--Log out-->
                     {% if user.is_authenticated %}
                     <a href="{% url 'wiki:logout' %}" class="btn btn-danger"
-                        style="align-self: right;">Logout</a><br><br>
+                        style="align-self: right; font-size: 20px;">Logout</a><br><br>
                     {% else %}
-                    <a href="{% url 'wiki:logout' %}" class="btn btn-primary">Login</a><br>
+                    <a href="{% url 'wiki:logout' %}" class="btn btn-primary" style="font-size: 20px;">Login</a><br>
                     <br>
                     {% endif %}
                 </li>
@@ -82,12 +84,12 @@
         </div>
     </nav>
     <br>
-    <h2>Upload A File</h2>
+    <h2 style="font-size: 30px;">Upload A File</h2><br>
 
-    <form method='POST' enctype='multipart/form-data' action="{% url 'wiki:upload_page' %}">
-        {% csrf_token %}
-        {{form}}
-        <input type='submit' value="Upload">
+    <form method="POST" enctype="multipart/form-data" action="/wiki/upload/">
+        <input class="btn btn-primary" type="hidden" name="csrfmiddlewaretoken" value="bL12YEcEMe2Bta75wUnLuma0KUJkITO6BSOHSNwzGIvnwjGkAB46Uf0ckESwBrBC">
+        <label for="id_upload">Upload:  </label><input  type="file" name="upload" required="" id="id_upload" style="margin: 0 0 0 10px;">
+        <input class="btn btn-primary" type="submit" value="Upload">
     </form>
 
 </section>
@@ -96,7 +98,7 @@
 
 <section>
 
-    <h2>Uploaded Files:</h2>
+    <h2 style="font-size: 30px;">Uploaded Files:</h2>
     <div class="container">
         {% if files %}
         <ul class="list-group" id="listorder">
