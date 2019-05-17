@@ -87,8 +87,9 @@
     <h2 style="font-size: 30px;">Upload A File</h2><br>
 
     <form method="POST" enctype="multipart/form-data" action="/wiki/upload/">
+        {% csrf_token %}
         <input class="btn btn-primary" type="hidden" name="csrfmiddlewaretoken" value="bL12YEcEMe2Bta75wUnLuma0KUJkITO6BSOHSNwzGIvnwjGkAB46Uf0ckESwBrBC">
-        <label for="id_upload">Upload:  </label><input  type="file" name="upload" required="" id="id_upload" style="margin: 0 0 0 10px;">
+        <label for="id_upload">Upload: </label><input class="btn-primary" type="file" name="upload" required="" id="id_upload" style="margin: 0 0 0 10px;">
         <input class="btn btn-primary" type="submit" value="Upload">
     </form>
 
