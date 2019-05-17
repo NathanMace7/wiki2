@@ -69,3 +69,4 @@ def upload_file(request):
     context['form'] = form
     context['files'] = UserFileUpload.objects.all().order_by('upload')
     return render(request, 'wiki/upload.html', context)
+

@@ -132,3 +132,4 @@ LOGOUT_REDIRECT_URL = "/wiki/accounts/login/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
