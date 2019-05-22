@@ -1,16 +1,16 @@
 {% extends 'wiki/base.html' %}
 {% load static %}
 
+<!--Title-->
+{% block content %}
+{% block contentTitle %}
+
 <!--Back To Top Button-->
 <section>
     <!--Back To Top Button Style-->
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-        }
-
-        #myBtn {
+        /*Button Apperence*/
+        #topBtn {
             display: none;
             position: fixed;
             bottom: 20px;
@@ -21,26 +21,28 @@
             color: white;
             padding: 15px;
             border-radius: 4px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        #myBtn:hover {
+        /*When Button Is Hovered Over*/
+        #topBtn:hover {
             background-color: #555;
         }
     </style>
 
     <!--Back To Top Button-->
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
 
     <!--Back To Top Button Script-->
     <script>
-        // When the user scrolls down 20px from the top of the document, show the button
+        // When the user scrolls down 30px from the top of the document, show the button
         window.onscroll = function () { scrollFunction() };
 
         function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("myBtn").style.display = "block";
+            if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+                document.getElementById("topBtn").style.display = "block";
             } else {
-                document.getElementById("myBtn").style.display = "none";
+                document.getElementById("topBtn").style.display = "none";
             }
         }
 
@@ -54,68 +56,93 @@
 
 <!--Navbar-->
 <section>
-    <!--Starter Content From base.html-->
-    {% block content %}
 
     <!--Navbar Extension Feature-->
     <nav class="navbar navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <!--Aligns Button-->
+        <div class="container">
+            <!--Navbar Collapse Button-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!--Navbar Button Icon-->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
     </nav>
 
+    <!--Navbar Contents-->
     <div class="pos-f-t">
         <div class="collapse" id="navbarToggleExternalContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:index' %}"
-                        style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
-                <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:upload_page' %}"
-                        style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
-                <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span></a></li>
-                <li>
-                    <!--Login / Logout Button-->
-                    <!--Log out-->
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'wiki:logout' %}" class="btn btn-danger"
-                        style="align-self: right; font-size: 20px;">Logout</a><br><br>
-                    {% else %}
-                    <a href="{% url 'wiki:logout' %}" class="btn btn-primary" style="font-size: 20px;">Login</a><br>
-                    <br>
-                    {% endif %}
-                </li>
-            </ul>
+            <!--Aligns Contents-->
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+                    <!--Wiki Index-->
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:index' %}"
+                            style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
+                    <!--Upload (Disabled)-->
+                    <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:upload_page' %}"
+                            style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
+                    <!--Login/Logout Button-->
+                    <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li>
+                        <!--Login / Logout Button-->
+                        <!--Log out-->
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'wiki:logout' %}" class="btn btn-danger"
+                            style="align-self: right; font-size: 20px;">Logout</a><br><br>
+                        <!--Log in-->
+                        {% else %}
+                        <a href="{% url 'wiki:logout' %}" class="btn btn-primary" style="font-size: 20px;">Login</a><br>
+                        <br>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
-<br>
-<section>
-    <h2 style="font-size: 30px;">Upload A File</h2><br>
-
-    <form method="POST" enctype="multipart/form-data" action="/wiki/upload/">
-        {% csrf_token %}
-        <input type="hidden" name="csrfmiddlewaretoken"
-            value="bL12YEcEMe2Bta75wUnLuma0KUJkITO6BSOHSNwzGIvnwjGkAB46Uf0ckESwBrBC">
-        <label class="btn" for="id_upload">Upload: </label><input class="btn" type="file" name="upload" required=""
-            id="id_upload" style="margin: 0 0 0 10px;">
-        <input class="btn btn-primary" type="submit" value="Upload">
-    </form>
-</section>
-
 <hr />
 
 <section>
-    <h2 style="font-size: 30px;">Uploaded Files:</h2>
     <div class="container">
-        {% if files %}
-        <ul class="list-group" id="listorder">
-            {% for file in files %}
-            <li class="list-group-item"><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No uploaded files</p>
-        {% endif %}
+        <!--Sub Title-->
+        <h2 style="font-size: 30px;">Upload A File</h2><br>
+
+        <!--Upload File Form-->
+        <!--Form Type-->                   <!--Where the files go:-->
+        <form method="POST" enctype="multipart/form-data" action="/wiki/upload/">
+            {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken"
+                value="bL12YEcEMe2Bta75wUnLuma0KUJkITO6BSOHSNwzGIvnwjGkAB46Uf0ckESwBrBC">
+            <!--Upload Label-->
+            <h2 style="font-size: 20px; margin: 0 20px 0 0; color: #0078F8;">Upload: </h2>
+            <!--Select File Form-->
+            <input class="btn" type="file" name="upload" required="" id="id_upload">
+            <!--Upload File Form-->
+            <input class="btn btn-primary" type="submit" value="Upload" style="margin: 0 0 0 100px">
+        </form>
     </div>
 </section>
+<hr />
+
+<section>
+    <div class="container">
+        <h2 style="font-size: 30px;">Uploaded Files:</h2>
+        <div class="container">
+            {% if files %}
+            <ul class="list-group" id="listorder">
+                {% for file in files %}
+                <li class="list-group-item"><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No uploaded files</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
 {% endblock %}

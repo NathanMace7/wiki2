@@ -5,46 +5,12 @@
 {% block content %}
 {% block contentTitle %}
 
-<nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
-    
-<div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:index' %}" style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
-            <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:upload_page' %}" style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
-            <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span></a></li>
-            <li>
-                <!--Login / Logout Button-->
-                <!--Log out-->
-                {% if user.is_authenticated %}
-                <a href="{% url 'wiki:logout' %}" class="btn btn-danger"
-                style="align-self: right; font-size: 20px;">Logout</a><br><br>
-                {% else %}
-                <a href="{% url 'wiki:logout' %}" class="btn btn-primary" style="font-size: 20px;">Login</a><br>
-                <br>
-                {% endif %}
-            </li>
-        </ul>
-    </div>
-</div>
-
-    <br>
-
-    <h2 class="text-primary" style="font-size: 30px;">Wiki Index</h2>
-
+<!--Back To Top Button-->
+<section>
     <!--Back To Top Button Style-->
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-        }
-
-        #myBtn {
+        /*Button Apperence*/
+        #topBtn {
             display: none;
             position: fixed;
             bottom: 20px;
@@ -55,81 +21,146 @@
             color: white;
             padding: 15px;
             border-radius: 4px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        #myBtn:hover {
+        /*When Button Is Hovered Over*/
+        #topBtn:hover {
             background-color: #555;
         }
     </style>
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-    {% endblock %}
 
-    <!--Index List-->
-    <div class="container">
-        {% if pages %}
-        <ul class="list-group" id="listorder">
-            {% for page in pages %}
-            <li class="list-group-item"><a href="{% url 'wiki:detail' page.title %}">{{ page.title }}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No pages are available.</p>
-        {% endif %}
+    <!--Back To Top Button-->
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
 
-        <!--This script sorts the Index List alphabetically automatically-->
-        <script>
-       /* function sortList()*/ {
-                var list, i, switching, b, shouldSwitch;
-                list = document.getElementById("listorder");
-                switching = true;
-                /* Make a loop that will continue until
-                no switching has been done: */
-                while (switching) {
-                    // start by saying: no switching is done:
-                    switching = false;
-                    b = list.getElementsByTagName("LI");
-                    // Loop through all list-items:
-                    for (i = 0; i < (b.length - 1); i++) {
-                        // start by saying there should be no switching:
-                        shouldSwitch = false;
-                        /* check if the next item should
-                        switch place with the current item: */
-                        if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-                            /* if next item is alphabetically
-                            lower than current item, mark as a switch
-                            and break the loop: */
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                    if (shouldSwitch) {
-                        /* If a switch has been marked, make the switch
-                        and mark the switch as done: */
-                        b[i].parentNode.insertBefore(b[i + 1], b[i]);
-                        switching = true;
-                    }
-                }
+    <!--Back To Top Button Script-->
+    <script>
+        // When the user scrolls down 30px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+                document.getElementById("topBtn").style.display = "block";
+            } else {
+                document.getElementById("topBtn").style.display = "none";
             }
-        </script>
+        }
 
-        <!--Back To Top Button Script-->
-        <script>
-            // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function () { scrollFunction() };
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</section>
 
-            function scrollFunction() {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    document.getElementById("myBtn").style.display = "block";
-                } else {
-                    document.getElementById("myBtn").style.display = "none";
-                }
-            }
+<!--Navbar-->
+<section>
 
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            }
-        </script>
+    <!--Navbar Extension Feature-->
+    <nav class="navbar navbar-dark bg-dark">
+        <!--Aligns Button-->
+        <div class="container">
+            <!--Navbar Collapse Button-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!--Navbar Button Icon-->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!--Navbar Contents-->
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <!--Aligns Contents-->
+            <div class="container">
+                <ul class="navbar-nav mr-auto">
+                    <!--Wiki Index (Disabled)-->
+                    <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:index' %}"
+                            style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
+                    <!--Upload-->
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:upload_page' %}"
+                            style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
+                    <!--Login/Logout Button-->
+                    <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li>
+                        <!--Login / Logout Button-->
+                        <!--Log out-->
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'wiki:logout' %}" class="btn btn-danger"
+                            style="align-self: right; font-size: 20px;">Logout</a><br><br>
+                        <!--Log in-->
+                        {% else %}
+                        <a href="{% url 'wiki:logout' %}" class="btn btn-primary" style="font-size: 20px;">Login</a><br>
+                        <br>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    {% endblock content %}
+</section>
+<hr />
+
+<!--Index List-->
+<div class="container">
+    <!--Subtitle-->
+    <h2 class="text-primary" style="font-size: 30px;">Wiki Index</h2>
+    <!--Index-->
+    {% if pages %}
+    <ul class="list-group" id="listorder">
+        {% for page in pages %}
+        <li class="list-group-item"><a href="{% url 'wiki:detail' page.title %}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No pages are available.</p>
+    {% endif %}
+
+    <!--This script sorts the Index List alphabetically automatically-->
+    <script>
+       /* function sortList()*/ {
+            var list, i, switching, b, shouldSwitch;
+            list = document.getElementById("listorder");
+            switching = true;
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // start by saying: no switching is done:
+                switching = false;
+                b = list.getElementsByTagName("LI");
+                // Loop through all list-items:
+                for (i = 0; i < (b.length - 1); i++) {
+                    // start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* check if the next item should
+                    switch place with the current item: */
+                    if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+                        /* if next item is alphabetically
+                        lower than current item, mark as a switch
+                        and break the loop: */
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark the switch as done: */
+                    b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</div>
+
+<!--System Information-->
+<div style="font-size: 15px; text-align: left; color: rgb(107, 107, 107); padding: 30px 0 0 3px;">
+    {{request.META.HTTP_USER_AGENT}}<br>{{ request.META.REMOTE_ADDR}}
+</div>
+
+{% endblock %}
+{% endblock content %}
