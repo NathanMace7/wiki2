@@ -1,6 +1,7 @@
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 from .models import Page, UserFileUpload
 from .forms import UploadFileForm
@@ -26,6 +27,8 @@ def view_page(request, pk):
     try:
         page = Page.objects.get(pk=pk)
         page.counter += 1
+        # page.counter = F('counter') + 1
+        # page.save(update_fields=['counter'])
         page.save()
         return render(request, 'wiki/detail.html', {'page': page})
     except Page.DoesNotExist:
