@@ -1,66 +1,77 @@
 {% extends 'wiki/base.html' %}
 {% load static %}
 
-<!--Back To Top Button Style-->
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-    }
-
-    #myBtn {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 30px;
-        z-index: 99;
-        font-size: 18px;
-        background-color: red;
-        color: white;
-        padding: 15px;
-        border-radius: 4px;
-    }
-
-    #myBtn:hover {
-        background-color: #555;
-    }
-</style>
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-
-<!--Back To Top Button Script-->
-<script>
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function () { scrollFunction() };
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("myBtn").style.display = "block";
-        } else {
-            document.getElementById("myBtn").style.display = "none";
-        }
-    }
-
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-</script>
-
+<!--Back To Top Button-->
 <section>
+    <!--Back To Top Button Style-->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            background-color: red;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        #myBtn:hover {
+            background-color: #555;
+        }
+    </style>
+
+    <!--Back To Top Button-->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <!--Back To Top Button Script-->
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</section>
+
+<!--Navbar-->
+<section>
+    <!--Starter Content From base.html-->
     {% block content %}
+
+    <!--Navbar Extension Feature-->
     <nav class="navbar navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
             aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
-        
+
     <div class="pos-f-t">
         <div class="collapse" id="navbarToggleExternalContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:index' %}" style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
-                <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:upload_page' %}" style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
+                <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:index' %}"
+                        style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
+                <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:upload_page' %}"
+                        style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
                 <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span></a></li>
                 <li>
                     <!--Login / Logout Button-->
@@ -76,8 +87,9 @@
             </ul>
         </div>
     </div>
-
-    <br>
+</section>
+<br>
+<section>
     <h2 style="font-size: 30px;">Upload A File</h2><br>
 
     <form method="POST" enctype="multipart/form-data" action="/wiki/upload/">
@@ -88,13 +100,11 @@
             id="id_upload" style="margin: 0 0 0 10px;">
         <input class="btn btn-primary" type="submit" value="Upload">
     </form>
-
 </section>
 
 <hr />
 
 <section>
-
     <h2 style="font-size: 30px;">Uploaded Files:</h2>
     <div class="container">
         {% if files %}
