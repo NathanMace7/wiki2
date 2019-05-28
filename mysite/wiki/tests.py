@@ -57,7 +57,6 @@ class EditPageTest(TestCase):
         page.save()
 
     def setUp(self):
-        self.client = Client()
         self.user = User.objects.create_user('TestUser', 'TestUser@gmail.com', 'testingpassword')
 
     def test_edit_page(self):
