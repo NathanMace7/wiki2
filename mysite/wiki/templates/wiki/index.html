@@ -30,6 +30,15 @@
         #topBtn:hover {
             background-color: #555;
         }
+
+        #myInput {
+            width: 100%;
+            font-size: 16px;
+            padding: 10px 20px 10px 42px;
+            margin: 0 0 10px 0;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
     </style>
 
     <!--Back To Top Button-->
@@ -120,7 +129,20 @@
 <!--Index List-->
 <div class="container">
     <!--Subtitle-->
-    <h2 class="text-primary" style="font-size: 30px;">Wiki Index</h2>
+    <div class="flexbox">
+
+
+    </div><br>
+
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <h2 class="text-primary" style="font-size: 30px;">Wiki Index</h2>
+        </div>
+        <div class="p-2"></div>
+        <div class="p-2"><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for words.."
+                title="Type in a word"></div>
+    </div>
+
     <!--Index-->
     {% if pages %}
     <ul class="list-group" id="listorder">
@@ -135,37 +157,55 @@
     <!--This script sorts the Index List alphabetically automatically-->
     <script>
        /* function sortList()*/ {
-                var list, i, switching, b, shouldSwitch;
-                list = document.getElementById("listorder");
-                switching = true;
-                /* Make a loop that will continue until
-                no switching has been done: */
-                while (switching) {
-                    // start by saying: no switching is done:
-                    switching = false;
-                    b = list.getElementsByTagName("LI");
-                    // Loop through all list-items:
-                    for (i = 0; i < (b.length - 1); i++) {
-                        // start by saying there should be no switching:
-                        shouldSwitch = false;
-                        /* check if the next item should
-                        switch place with the current item: */
-                        if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-                            /* if next item is alphabetically
-                            lower than current item, mark as a switch
-                            and break the loop: */
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                    if (shouldSwitch) {
-                        /* If a switch has been marked, make the switch
-                        and mark the switch as done: */
-                        b[i].parentNode.insertBefore(b[i + 1], b[i]);
-                        switching = true;
+            var list, i, switching, b, shouldSwitch;
+            list = document.getElementById("listorder");
+            switching = true;
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // start by saying: no switching is done:
+                switching = false;
+                b = list.getElementsByTagName("LI");
+                // Loop through all list-items:
+                for (i = 0; i < (b.length - 1); i++) {
+                    // start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* check if the next item should
+                    switch place with the current item: */
+                    if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+                        /* if next item is alphabetically
+                        lower than current item, mark as a switch
+                        and break the loop: */
+                        shouldSwitch = true;
+                        break;
                     }
                 }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark the switch as done: */
+                    b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                    switching = true;
+                }
             }
+        }
+    </script>
+    <script>
+        function myFunction() {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("listorder");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
     </script>
 </div>
 
