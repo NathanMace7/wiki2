@@ -84,17 +84,19 @@
     </nav>
 
     <!--Navbar Contents-->
-    <div class="pos-f-t">
-        <div class="collapse bg-dark" id="navbarToggleExternalContent">
+    <div class="pos-f-t" style="text-align: center;">
+        <div style="width: 100%; background: #383E44;" class="collapse bg" id="navbarToggleExternalContent">
             <!--Aligns Contents-->
             <div class="container">
                 <ul class="navbar-nav mr-auto">
                     <!--Wiki Index-->
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'wiki:index' %}"
-                            style="font-size: 20px;">Wiki Index<span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item active" style="margin: 10px 0 0 0;"><a class="nav-link"
+                            href="{% url 'wiki:index' %}" style="font-size: 20px; color: lime;">Wiki Index<span
+                                class="sr-only">(current)</span></a></li>
                     <!--Upload (Disabled)-->
-                    <li class="nav-item active"><a class="nav-link disabled" href="{% url 'wiki:upload_page' %}"
-                            style="font-size: 20px;">Upload<span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item active" style="margin: 5px 0 0 0;"><a class="nav-link disabled"
+                            href="{% url 'wiki:upload_page' %}" style="font-size: 20px;">Upload<span
+                                class="sr-only">(current)</span></a></li>
                     <!--Login/Logout Button-->
                     <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
                     </li>
@@ -123,7 +125,8 @@
         <h2 style="font-size: 30px;">Upload A File</h2><br>
 
         <!--Upload File Form-->
-        <!--Form Type-->                   <!--Where the files go:-->
+        <!--Form Type-->
+        <!--Where the files go:-->
         <form method='POST' enctype='multipart/form-data' action="{% url 'wiki:upload_page' %}">
             {% csrf_token %}
             {{form}}
