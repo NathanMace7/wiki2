@@ -65,7 +65,7 @@ def delete_page(request, pk):
     context = {"object": obj}
     return render(request, template_name, context)
 
-
+@login_required(login_url='wiki:login')
 def upload_file(request):
     context = {}
     if request.method == 'POST':

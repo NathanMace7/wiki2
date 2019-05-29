@@ -124,16 +124,10 @@
 
         <!--Upload File Form-->
         <!--Form Type-->                   <!--Where the files go:-->
-        <form method="POST" enctype="multipart/form-data" action="/wiki/upload/">
+        <form method='POST' enctype='multipart/form-data' action="{% url 'wiki:upload_page' %}">
             {% csrf_token %}
-            <input type="hidden" name="csrfmiddlewaretoken"
-                value="bL12YEcEMe2Bta75wUnLuma0KUJkITO6BSOHSNwzGIvnwjGkAB46Uf0ckESwBrBC">
-            <!--Upload Label-->
-            <h2 style="font-size: 20px; margin: 0 20px 0 0; color: #0078F8;">Upload: </h2>
-            <!--Select File Form-->
-            <input class="btn" type="file" name="upload" required="" id="id_upload">
-            <!--Upload File Form-->
-            <input class="btn btn-primary" type="submit" value="Upload" style="margin: 0 0 0 100px">
+            {{form}}
+            <input class="btn btn-primary" type='submit' value="Upload">
         </form>
     </div>
 </section>
