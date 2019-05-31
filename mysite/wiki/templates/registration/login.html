@@ -1,45 +1,64 @@
+<!--Extends from the contents in base.html-->
 {% extends "wiki/base.html" %}
-
 {% block content %}
 
+<!--If you got your login details wrong, this error message appears-->
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
-{% if next %}
-{% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-{% else %}
-<p>Please login to see this page.</p>
-{% endif %}
-{% endif %}
+<div class="container">
+    <!--Makes the error message bold-->
+    <strong>
+        <!--This message shows if you try to acess a page only admins or higher-up accounts can access-->
+        {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+        <!--This message shows if you aren't logged in-->
+        <p>Please login to see this page.</p>
+        {% endif %}
+        {% endif %}
+    </strong>
+</div>
 
+<!--Logging in form-->
 <form class="container" method="post" action="{% url 'wiki:login' %}">
     {% csrf_token %}
 
     <br>
     <table style="font-size: 20px;">
         <tr>
+            <!--Username Tag-->
             <td><label for="id_username" style="margin: 0 0 0 20px;">Username:</label></td>
-            <td><input type="text" name="username" autofocus="" required="" id="id_username" style="margin: 0 0 0 20px;"></td>
+            <!--Username Type Box-->
+            <td><input type="text" name="username" autofocus="" required="" id="id_username"
+                    style="margin: 0 0 0 20px;"></td>
         </tr>
         <tr>
+            <!--Password Tag-->
             <td><label for="id_password" style="margin: 0 0 0 20px;">Password:</label></td>
+            <!--Password Type Box-->
             <td><input type="password" name="password" required="" id="id_password" style="margin: 0 0 0 20px;">
             </td>
         </tr>
         </tbody>
     </table>
 
+    <!--Buttons-->
     <br>
     <div style="text-align: center">
+        <!--Log in Button-->
         <input class="btn btn-primary" style="font-size: 15px;" type="submit" value="Login">
         <input type="hidden" name="next" value="{{ next }}">
+        <!--Back/Cancel Button-->
         <a href="/wiki/" class="btn btn-secondary">Back</a>
     </div>
 </form>
-<!--
+
+
+<!-- Original Login Information (Incase the one used breaks somehow)
 <form class="container" method="post" action="{% url 'wiki:login' %}">
     {% csrf_token %}
 

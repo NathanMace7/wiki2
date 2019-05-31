@@ -1,3 +1,4 @@
+<!--Extends from the contents in base.html-->
 {% extends 'wiki/base.html' %}
 {% load static %}
 
@@ -125,29 +126,32 @@
         <h2 style="font-size: 30px;">Upload A File</h2><br>
 
         <!--Upload File Form-->
-        <!--Form Type-->
-        <!--Where the files go:-->
         <form method='POST' enctype='multipart/form-data' action="{% url 'wiki:upload_page' %}">
             {% csrf_token %}
             {{form}}
+            <!--Upload Button-->
             <input class="btn btn-primary" type='submit' value="Upload">
         </form>
     </div>
 </section>
 <hr />
 
+<!--This section is where all the uploaded files go-->
 <section>
     <div class="container">
+        <!--Uploaded Files Subheading-->
         <h2 style="font-size: 30px;">Uploaded Files:</h2>
+        <!--File List-->
         <div class="container">
             {% if files %}
             <ul class="list-group" id="listorder">
                 {% for file in files %}
-                <li class="list-group-item"><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
+                <li class="list-group-item" id="listorder"><a href="{{file.upload.url}}">{{file.upload.name}}</a></li>
                 {% endfor %}
             </ul>
             {% else %}
-            <p>No uploaded files</p>
+            <!--Display a No Files Uploaded" message when no files have been uploaded-->
+            <stong><p>No Files Uploaded</p></stong>
             {% endif %}
         </div>
     </div>

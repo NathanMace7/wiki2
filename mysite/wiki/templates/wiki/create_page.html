@@ -1,4 +1,4 @@
-<!--Extending Page From base.html-->
+<!--Extends from the contents in base.html-->
 {% extends 'wiki/base.html' %}
 {% block content %}
 
@@ -65,6 +65,7 @@
     <a class="btn btn-primary" href="{% url 'wiki:edit_page' page_name %}">
         Create
     </a>
+    <!--Back Button-->
     <a class="btn btn-secondary" href="{% url 'wiki:index' %}">
         Go Back
     </a>

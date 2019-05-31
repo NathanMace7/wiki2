@@ -1,3 +1,4 @@
+<!--Extends from the contents in base.html-->
 {% extends "wiki/base.html" %}
 {% load static %}
 
@@ -136,10 +137,9 @@
             <h2 class="text-primary" style="font-size: 30px;">Wiki Index</h2>
         </div>
         <div class="p-2"></div>
+        <!--Search Bar-->
         <div class="align-self-stretch" style="width: 50%">
-            <input type="text" id="myInput" 
-                onkeyup="myFunction()" 
-                placeholder="Search for words.."
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for words.."
                 title="Type in a word">
         </div>
     </div>
@@ -190,6 +190,8 @@
             }
         }
     </script>
+
+    <!--This script allows the user to search for a word-->
     <script>
         function myFunction() {
             var input, filter, ul, li, a, i, txtValue;
