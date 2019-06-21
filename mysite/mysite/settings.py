@@ -136,19 +136,30 @@ MEDIA_URL = '/media/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'error_filter': {
+            '()': 'MyWiki.custom_logging.MyErrorFilter',
+        }
+    },
+    'formatters': {
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        }
+    },
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+            'formatter': 'file',
+            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+            'filters': ['error_filter']
         },
     },
     'loggers': {
-        'django.server': {
+        'django': {
             'handlers': ['file'],
             'level': 'WARNING',
             'propagate': True,
         },
     },
-}
 
