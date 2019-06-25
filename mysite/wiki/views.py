@@ -2,7 +2,7 @@ from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
-
+from django.http import HttpResponse
 from .models import Page, UserFileUpload
 from .forms import UploadFileForm
 
@@ -78,3 +78,18 @@ def upload_file(request):
     context['files'] = UserFileUpload.objects.all().order_by('upload')
     return render(request, 'wiki/upload.html', context)
 
+def test_500_error(request):
+    # Return an "Internal Server Error" 500 response code.
+    return HttpResponse(status=500)
+
+def test_404_error(request):
+    # Return an "Internal Server Error" 404 response code.
+    return HttpResponse(status=404)
+
+def test_401_error(request):
+    # Return an "Internal Server Error" 401 response code.
+    return HttpResponse(status=401)
+
+def test_502_error(request):
+    # Return an "Internal Server Error" 502 response code.
+    return HttpResponse(status=502)

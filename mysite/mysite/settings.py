@@ -138,7 +138,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'filters': {
         'error_filter': {
-            '()': 'MyWiki.custom_logging.MyErrorFilter',
+            '()': 'mysite.custom_logging.MyErrorFilter',
         }
     },
     'formatters': {
@@ -151,7 +151,7 @@ LOGGING = {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
             'formatter': 'file',
-            'filename': os.path.join(BASE_DIR, 'logs/debug.log'),
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
             'filters': ['error_filter']
         },
     },
