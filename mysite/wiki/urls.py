@@ -1,8 +1,7 @@
 from django.urls import path, include
-
-
 from . import views
 
+#Here is a group of URls the website contains
 app_name = 'wiki'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),

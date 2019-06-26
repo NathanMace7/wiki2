@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.urls import reverse
 from .models import Page
 
+#Tests page creation
 class PageCreationTestCase(TestCase):
     def setUp(self):
         page = Page.objects.create(title="Page_A", content="This is Page A for Testing")
@@ -26,6 +27,7 @@ class PageCreationTestCase(TestCase):
         response = self.client.get('/wiki/IAmFailing/')
         self.assertContains(response, 'As this page does not exist, would you like to create it?')
 
+#Tests page loading
 class PageLoadTestCase(TestCase):
 
     def test_index_view(self):
@@ -40,6 +42,7 @@ class PageLoadTestCase(TestCase):
         response = self.client.get('/wiki/accounts/login/')
         self.assertContains(response, 'Username:')
 
+#Tests Login System
 class LoginTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -51,6 +54,7 @@ class LoginTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Logout")
 
+#Tests Page Editing
 class EditPageTest(TestCase):
     def test_edit_me_later(self):
         page = Page.objects.create(title = "editing", content = "Im going to be changing soon")

@@ -10,6 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+#Directs user to the Index page
 class IndexView(generic.ListView):
     template_name = 'wiki/index.html'
     context_object_name = 'pages'
@@ -17,12 +18,12 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Page.objects.all()
 
-
+#Directs User to the Detail page
 class DetailView(generic.DetailView):
     model = Page
     template_name = 'wiki/detail.html'
 
-
+#This is the view counter at the bottom of the Detail page
 def view_page(request, pk):
     try:
         page = Page.objects.get(pk=pk)
@@ -34,8 +35,10 @@ def view_page(request, pk):
     except Page.DoesNotExist:
         return render(request, 'wiki/create_page.html', {'page_name': pk})
 
-
+#Login is required for this page
 @login_required(login_url='wiki:login')
+
+#This allows you to edit the page
 def edit_page(request, pk):
     try:
         page = Page.objects.get(pk=pk)
@@ -44,8 +47,9 @@ def edit_page(request, pk):
         content = ''
     return render(request, 'wiki/edit_page.html', {'page_name': pk, 'content': content},)
 
-
+#Login is required for this page
 @login_required(login_url='wiki:login')
+#This allows you to save the changed you have made
 def save_page(request, pk):
     content = request.POST["content"]
     try:
@@ -57,15 +61,18 @@ def save_page(request, pk):
         page.save()
     return redirect(page)
 
-
+#Login is required for this page
 @login_required(login_url='wiki:login')
+#Thi allows you to delete the page
 def delete_page(request, pk):
     page = Page.objects.get(pk=pk)
     template_name = 'wiki/delete.html'
     context = {"object": obj}
     return render(request, template_name, context)
 
+#Login is required for this page
 @login_required(login_url='wiki:login')
+#This allows you to upload files
 def upload_file(request):
     context = {}
     if request.method == 'POST':
@@ -78,6 +85,8 @@ def upload_file(request):
     context['files'] = UserFileUpload.objects.all().order_by('upload')
     return render(request, 'wiki/upload.html', context)
 
+
+#Error Tests
 def test_500_error(request):
     # Return an "Internal Server Error" 500 response code.
     return HttpResponse(status=500)
