@@ -1,16 +1,5 @@
-li a {color: rgb(0, 143, 0);}
-
-body {background: rgb(255, 255, 255);}
-
+/* WikiNerdia Title */
 h1 {font-family: 'Days One', sans-serif;}
+
+/* Subtitles */
 h2 {font-family: 'Days One', sans-serif; font-size: 15px; color: rgb(0, 143, 0);}
-
-@import "compass/css3";
-
-.flex-container {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-}
-

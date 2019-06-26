@@ -215,14 +215,15 @@
 <!--System Information-->
 <div style="font-size: 15px; text-align: left; color: rgb(107, 107, 107); padding: 30px 0 0 3px;">
     {{request.META.HTTP_USER_AGENT}}<br>{{ request.META.REMOTE_ADDR}}
-</div>
+
 <p id="demo" class="text-center"></p>
 </section>
-<script>
+<script style="font-size: 15px; text-align: left; color: rgb(107, 107, 107); padding: 30px 0 0 3px;">
     function myScreenresFunction() {
       var x = "Screen Resolution:\n" + "Total Width: " + screen.width + "px, " + "Total Height: " + screen.height + "px ";
       document.getElementById("demo").innerHTML = x;
     }
     </script>
+</div>
 {% endblock %}
 {% endblock content %}
